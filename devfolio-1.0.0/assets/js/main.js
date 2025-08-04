@@ -249,3 +249,29 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+// === 👇 Custom View Counter Functionality Appended Below 👇 ===
+
+document.addEventListener("DOMContentLoaded", function () {
+  const counter = document.querySelector(".counterNumber"); // Fix: Select by class instead of id
+
+  if (!counter) {
+    console.error("Error: Counter element not found.");
+    return;
+  }
+
+  async function updateCounter() {
+    try {
+      let response = await fetch(
+        "https://oe64hywwd2h3gaht5w3cerqmsq0rpcnx.lambda-url.eu-north-1.on.aws/"
+      );
+      let data = await response.json();
+      counter.innerHTML = `👀 Views: ${data.views || 0}`;
+    } catch (error) {
+      console.error("Error fetching views:", error);
+      counter.innerHTML = "Failed to load views";
+    }
+  }
+
+  updateCounter();
+});
