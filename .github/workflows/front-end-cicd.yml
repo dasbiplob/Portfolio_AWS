@@ -12,9 +12,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
       - name: Sync Website to S3
         uses: jakejarvis/s3-sync-action@master
         with:
